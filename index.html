@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Libre+Caslon+Text:400,700|Open+Sans:300,400,700&display=swap" rel="stylesheet">
+    <link href="./css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <title>Force Users - WCAG 2.0 Accessible Example</title>
+</head>
+<body>
+  <!-- ACCESSIBLE HEADER MENU -->
+  <header>
+    <div class="container">
+      <nav aria-label="main navigation" class="main-menu-desktop">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">The Force</a></li>
+            <li>
+                <a href="#" aria-haspopup="true" aria-expanded="false">Light Side Followers</a>
+                <ul>
+                    <li><a href="#">Light Jedi</a></li>
+                    <li><a href="#">Gray Jedi</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" aria-haspopup="true" aria-expanded="false">Dark Side Followers</a>
+                <ul>
+                    <li><a href="#">Siths</a></li>
+                    <li><a href="#">Dark Jedi</a></li>
+                </ul>
+            </li>
+        </ul>
+      </nav>
+
+      <button id="menu-toggler-mobile" class="menu-toggler-mobile" aria-haspopup="true" aria-expanded="false" aria-controls="main-menu-mobile" aria-label="mobile menu toggler">menu</button>
+    </div>
+
+    <nav aria-label="mobile main navigation" class="main-menu-mobile" id="main-menu-mobile">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">The Force</a></li>
+            <li>
+                <a href="#" aria-haspopup="true" aria-expanded="false">Light Side Followers</a>
+                <ul>
+                    <li><a href="#">Light Jedi</a></li>
+                    <li><a href="#">Gray Jedi</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" aria-haspopup="true" aria-expanded="false">Dark Side Followers</a>
+                <ul>
+                    <li><a href="#">Siths</a></li>
+                    <li><a href="#">Dark Jedi</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+  </header>  
+
+
+
+  <main role="main">
+      <div class="hero">
+        <div class="hero-image" role="img" aria-label="Hero image: shows Revan and Malak"></div>
+        <div class="hero-text">
+            <div class="container">
+                <div class="white-wrapper">
+                    <h1>Force Users</h1>
+                    <p>(WCAG 2.0 Simple Accessible Example to test different types of components and techniques related to accessibility programming and assistive technologies)</p>
+                </div>
+            </div>
+        </div>
+      </div>
+  </main>
+  <footer></footer>
+
+  <script src="./js/jquery-3.4.1.min.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
