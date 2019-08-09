@@ -180,6 +180,16 @@
     }
 
     carouselCreation();
+
+    $(window).on('resize', function(){
+        $('.carousel').each( function(){
+            var current_item = parseInt( $(this).attr('data-showing-item') );
+            var current_width = parseFloat( $(this).find('.elements-wrapper').css('width') );
+            var fixed_position = (current_item - 1) * current_width * -1;
+            var fixed_position_css = fixed_position + 'px';
+            $(this).find('.elements-wrapper').css('left', fixed_position_css);
+        });
+    });
 })(jQuery);
 
 
