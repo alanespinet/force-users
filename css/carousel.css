@@ -1,0 +1,50 @@
+.carousel {
+    background-color: #f2f2f2;
+    position: relative;
+}
+
+.elements-container {
+    overflow-x: hidden;
+}
+
+.elements-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    position: relative;
+    left: 0;
+    transition: left .5s ease;
+}
+
+.element {
+    min-height: 100px;
+    flex-basis: 100%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    background-color: silver;
+    width: 32px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px;
+    color: #222;
+}
+
+.prev-button {
+    left: 0;
+}
+
+.next-button {
+    right: 0;
+}
+

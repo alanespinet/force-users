@@ -40,7 +40,7 @@ section {
 .container {
     width: 100%;
     max-width: 1170px;
-    margin: 15px auto;
+    margin: 0 auto;
     padding: 0 15px;
 }
 
@@ -57,6 +57,7 @@ header {
     left: 0;
     top: 0;
     width: 100%;
+    padding-top: 15px;
 }
 
 .main-menu-desktop {
@@ -213,6 +214,30 @@ header {
     text-align: center;
 }
 
+.the-force-carousel {
+    margin-top: 30px;
+}
+
+.the-force-carousel .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.the-force-carousel .content-wrapper__text {
+    flex-basis: 65%;
+    padding: 45px;
+}
+
+.the-force-carousel .content-wrapper__image {
+    flex-basis: 35%;
+    height: 285px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+}
+
 @media (min-width: 768px){
     .main-menu-mobile {
         display: none !important;
@@ -226,6 +251,14 @@ header {
 
     .menu-toggler-mobile {
         display: block;
+    }
+
+    .the-force-carousel .content-wrapper__text {
+        flex-basis: 100%;
+    }
+
+    .the-force-carousel .content-wrapper__image {
+        display: none;
     }
 }
 
