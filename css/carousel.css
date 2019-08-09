@@ -38,6 +38,12 @@
     text-decoration: none;
     font-size: 20px;
     color: #222;
+    transition: all .3s ease;
+}
+
+.prev-button:hover,
+.next-button:hover {
+    background-color: #999;
 }
 
 .prev-button {
