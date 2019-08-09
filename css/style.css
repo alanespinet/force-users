@@ -223,6 +223,7 @@ header {
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
+    height: 100%;
 }
 
 .the-force-carousel .content-wrapper__text {
@@ -232,11 +233,12 @@ header {
 
 .the-force-carousel .content-wrapper__image {
     flex-basis: 35%;
-    height: 285px;
+    min-height: 285px;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     opacity: 0.2;
+    height: 100%;
 }
 
 @media (min-width: 768px){
