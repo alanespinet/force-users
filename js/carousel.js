@@ -1,20 +1,20 @@
 (function($){
     var can_move = true;
 
-    $('body').on('click', '.carousel .next-button', function(e){
+    $('body').on('click', '.acc_carousel .next-button', function(e){
         e.preventDefault();
-        
+
         if( can_move ){
             can_move = false;
 
-            var carousel_parent = $(this).parents('.carousel');
+            var carousel_parent = $(this).parents('.acc_carousel');
             var elements_wrapper = carousel_parent.find('.elements-wrapper');
             var wrapper_width = elements_wrapper.css('width');
             var wrapper_width_numeric = parseFloat(wrapper_width);
             var items_count = parseInt( carousel_parent.attr('data-items') );
             var current_item = parseInt( carousel_parent.attr('data-showing-item') );
 
-            if( current_item < items_count ){                
+            if( current_item < items_count ){
                 var wrapper_left = parseFloat( elements_wrapper.css('left') );
                 var new_left = wrapper_left - wrapper_width_numeric;
                 elements_wrapper.css('left', new_left + 'px');
@@ -39,7 +39,6 @@
                         elements_wrapper.removeAttr('style');
                     }, 50 );
                 }, 550 );
-
             }
 
             // elements visibility for SR
@@ -54,23 +53,28 @@
             carousel_parent.find('.element button').attr('tabindex', '-1');
             carousel_parent.find('.element[data-item="' + current_item + '"] button').attr('tabindex', '0');
 
+            setTimeout( function(){
+              carousel_parent.find('.carousel-single-dot').removeClass('active-dot');
+              carousel_parent.find('.carousel-single-dot_' + carousel_parent.attr('data-showing-item')).addClass('active-dot');
+            }, 560 );
+
             setTimeout( function(){ can_move = true; }, 600 );
         }
     });
 
-    $('body').on('click', '.carousel .prev-button', function(e){
+    $('body').on('click', '.acc_carousel .prev-button', function(e){
         e.preventDefault();
 
         if( can_move ){
             can_move = false;
 
-            var carousel_parent = $(this).parents('.carousel');
+            var carousel_parent = $(this).parents('.acc_carousel');
             var elements_wrapper = carousel_parent.find('.elements-wrapper');
             var wrapper_width = elements_wrapper.css('width');
             var wrapper_width_numeric = parseFloat(wrapper_width);
             var items_count = parseInt( carousel_parent.attr('data-items') );
             var current_item = parseInt( carousel_parent.attr('data-showing-item') );
-    
+
             if( current_item > 1 ){
                 var wrapper_left = parseFloat( elements_wrapper.css('left') );
                 var new_left = wrapper_left + wrapper_width_numeric;
@@ -116,73 +120,19 @@
             carousel_parent.find('.element button').attr('tabindex', '-1');
             carousel_parent.find('.element[data-item="' + current_item + '"] button').attr('tabindex', '0');
 
-            setTimeout( function(){ 
-                can_move = true; 
+            setTimeout( function(){
+              carousel_parent.find('.carousel-single-dot').removeClass('active-dot');
+              carousel_parent.find('.carousel-single-dot_' + carousel_parent.attr('data-showing-item')).addClass('active-dot');
+            }, 560 );
+
+            setTimeout( function(){
+                can_move = true;
             }, 600 );
         }
     });
 
-    function carouselCreation(){
-        $('.carousel').each( function(){
-            var items_count = $(this).find('.element').length;
-            
-            $(this).attr('aria-label', 'carousel of ' + items_count + ' elements');
-            $(this).attr('data-items', items_count);
-            $(this).attr('data-showing-item', '1');
-            
-            var $prev_button = $('<a href="#" role="button" aria-label="previous element" class="prev-button"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>');
-            var $next_button = $('<a href="#" role="button" aria-label="next element" class="next-button"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>');
-
-            $(this).prepend( $prev_button );
-
-            var $elements_container = $('<div class="elements-container"></div>');
-            var $elements_wrapper = $('<div class="elements-wrapper"></div>');
-
-            var counter = 1;
-            $(this).find('.element').each( function(){
-                $(this).addClass('element_' + counter);
-                $(this).attr('data-item', counter);
-
-                if( counter === 1 ){
-                    $(this).attr('aria-hidden', 'false');
-                } else {
-                    $(this).attr('aria-hidden', 'true');
-                }
-
-                $(this).attr('aria-label', 'carousel element ' + counter + ' of ' + items_count);
-                $(this).appendTo( $elements_wrapper );
-
-                counter++;
-            });
-
-            $elements_container.append( $elements_wrapper );
-            $(this).append( $elements_container );
-            $(this).append( $next_button );
-
-            // reset links to be unfocusable except the first element
-            $(this).find('.element a').each( function(){
-                $(this).attr('tabindex', '-1');
-            });
-            $(this).find('.element[data-item="1"] a').attr('tabindex', '0');
-
-            // reset inputs to be unfocusable except the first element
-            $(this).find('.element input').each( function(){
-                $(this).attr('tabindex', '-1');
-            });
-            $(this).find('.element[data-item="1"] input').attr('tabindex', '0');
-
-            // reset buttons to be unfocusable except the first element
-            $(this).find('.element button').each( function(){
-                $(this).attr('tabindex', '-1');
-            });
-            $(this).find('.element[data-item="1"] button').attr('tabindex', '0');
-        });
-    }
-
-    carouselCreation();
-
     $(window).on('resize', function(){
-        $('.carousel').each( function(){
+        $('.acc_carousel').each( function(){
             var current_item = parseInt( $(this).attr('data-showing-item') );
             var current_width = parseFloat( $(this).find('.elements-wrapper').css('width') );
             var fixed_position = (current_item - 1) * current_width * -1;
@@ -192,11 +142,83 @@
     });
 })(jQuery);
 
+jQuery.fn.createCarousel = function( configObj ){
+  var items_count = $(this).find('.element').length;
+
+  var configObj = configObj || {};
+  var prevHtml = configObj.prevHtml || 'Prev';
+  var nextHtml = configObj.nextHtml || 'Next';
+  var wcagDescription = configObj.wcagDescription || 'carousel of ' + items_count + ' elements';
+  var showDots = configObj.showDots || false;
+
+  $(this).attr('aria-label', wcagDescription);
+  $(this).attr('data-items', items_count);
+  $(this).attr('data-showing-item', '1');
+
+  var $prev_button = $('<a href="#" role="button" aria-label="previous element" class="prev-button">' + prevHtml + '</a>');
+  var $next_button = $('<a href="#" role="button" aria-label="next element" class="next-button">' + nextHtml + '</a>');
+
+  $(this).prepend( $prev_button );
+
+  var $elements_container = $('<div class="elements-container"></div>');
+  var $elements_wrapper = $('<div class="elements-wrapper"></div>');
+
+  var counter = 1;
+  $(this).find('.element').each( function(){
+      $(this).addClass('element_' + counter);
+      $(this).attr('data-item', counter);
+
+      if( counter === 1 ){
+          $(this).attr('aria-hidden', 'false');
+      } else {
+          $(this).attr('aria-hidden', 'true');
+      }
+
+      $(this).attr('aria-label', 'carousel element ' + counter + ' of ' + items_count);
+      $(this).appendTo( $elements_wrapper );
+
+      counter++;
+  });
+
+  $elements_container.append( $elements_wrapper );
+  $(this).append( $elements_container );
+  $(this).append( $next_button );
+
+  if( showDots ) {
+    var $dots = $('<div class="carousel-dots" aria-hidden="true"></div>');
+
+    for( var i = 0; i < items_count; i++ ){
+      var dot_classes = 'carousel-single-dot carousel-single-dot_' + (i+1);
+      if( i === 0 ){ dot_classes += ' active-dot'; }
+
+      var $dot = $('<div class="' + dot_classes + '"></div>');
+      $dots.append( $dot );
+    }
+
+    $(this).append( $dots );
+  }
+
+  // reset links to be unfocusable except the first element
+  $(this).find('.element a').each( function(){
+      $(this).attr('tabindex', '-1');
+  });
+  $(this).find('.element[data-item="1"] a').attr('tabindex', '0');
+
+  // reset inputs to be unfocusable except the first element
+  $(this).find('.element input').each( function(){
+      $(this).attr('tabindex', '-1');
+  });
+  $(this).find('.element[data-item="1"] input').attr('tabindex', '0');
+
+  // reset buttons to be unfocusable except the first element
+  $(this).find('.element button').each( function(){
+      $(this).attr('tabindex', '-1');
+  });
+  $(this).find('.element[data-item="1"] button').attr('tabindex', '0');
+}
 
 
-
-
-/* 
+/*
 STRUCTURE YOU WRITE:
 -------------------------------------------------
     <div class="carousel">

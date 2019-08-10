@@ -28,7 +28,7 @@
 
         var _open = $(this).attr('aria-expanded');
         var _controls = $(this).attr('aria-controls');
-        
+
         if( _open.toLowerCase() === 'false' ){
             $('#' + _controls).css('display', 'block');
             $(this).attr('aria-expanded', 'true');
@@ -85,4 +85,10 @@
 
     mq_mobile.addListener( scl_change );
     mq_not_mobile.addListener( scl_change );
+
+    $('.acc_carousel.force-users-carousel').createCarousel({
+      prevHtml: '<i class="fa fa-chevron-left" aria-hidden="true"></i>',
+      nextHtml: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
+      showDots: true
+    });
 })(jQuery);

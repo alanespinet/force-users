@@ -1,13 +1,13 @@
-.carousel {
+.acc_carousel {
     background-color: #f2f2f2;
     position: relative;
 }
 
-.elements-container {
+.acc_carousel .elements-container {
     overflow-x: hidden;
 }
 
-.elements-wrapper {
+.acc_carousel .elements-wrapper {
     display: flex;
     justify-content: flex-start;
     flex-wrap: nowrap;
@@ -16,15 +16,15 @@
     transition: left .5s ease;
 }
 
-.element {
+.acc_carousel .element {
     min-height: 100px;
     flex-basis: 100%;
     flex-grow: 0;
     flex-shrink: 0;
 }
 
-.prev-button,
-.next-button {
+.acc_carousel .prev-button,
+.acc_carousel .next-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -41,16 +41,42 @@
     transition: all .3s ease;
 }
 
-.prev-button:hover,
-.next-button:hover {
+.acc_carousel .prev-button:hover,
+.acc_carousel .next-button:hover {
     background-color: #999;
 }
 
-.prev-button {
+.acc_carousel .prev-button {
     left: 0;
 }
 
-.next-button {
+.acc_carousel .next-button {
     right: 0;
 }
 
+.acc_carousel .carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 14px;
+
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+}
+
+.acc_carousel .carousel-single-dot {
+  width: 10px;
+  height: 10px;
+  margin: 2px 10px;
+  border: 1px solid #222;
+  border-radius: 100%;
+  background-color: transparent;
+  transition: all .3s ease;
+}
+
+.acc_carousel .carousel-single-dot.active-dot {
+  background-color: #222;
+}
