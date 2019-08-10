@@ -241,6 +241,14 @@ header {
     height: 100%;
 }
 
+.the-force-carousel .carousel-single-dot {
+  border: 1px solid #999;
+}
+
+.the-force-carousel .carousel-single-dot.active-dot {
+  background-color: #999;
+}
+
 @media (min-width: 768px){
     .main-menu-mobile {
         display: none !important;
@@ -264,4 +272,3 @@ header {
         display: none;
     }
 }
-
