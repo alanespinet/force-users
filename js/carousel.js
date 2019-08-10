@@ -1,3 +1,10 @@
+/*
+ * Title: Accessible Carousel - acc_carousel
+ * Author: Alan Espinet
+ * Version: 1.0.0
+ * Description: WCAG 2.1 Accessoble Carousel
+*/
+
 (function($){
     var can_move = true;
 
